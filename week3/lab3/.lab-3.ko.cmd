@@ -1,0 +1,1 @@
+cmd_/home/aleke/sysprog/sp2018spring/week3/lab3/lab-3.ko := ld -r -m elf_x86_64  -z max-page-size=0x200000 -T ./scripts/module-common.lds  --build-id  -o /home/aleke/sysprog/sp2018spring/week3/lab3/lab-3.ko /home/aleke/sysprog/sp2018spring/week3/lab3/lab-3.o /home/aleke/sysprog/sp2018spring/week3/lab3/lab-3.mod.o ;  true
