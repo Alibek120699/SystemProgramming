@@ -14,7 +14,7 @@
 #include <asm/io.h>
 
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR("Ramanqul");
+MODULE_AUTHOR("Alibek");
 
 /*  ISR : interrupt handler
 *   This function services keyboard interrupts. It reads the relevant
