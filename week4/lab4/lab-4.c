@@ -14,6 +14,7 @@
 // PRIO_PROCESS is 0
 void change_nice_value(pid_t pid, int niceval) {
    setpriority(PRIO_PROCESS, pid, niceval); 
+   printf("Priority of process %d was changed to %d\n", pid, niceval);
 }
 
 // The sched_setscheduler() system call sets both the scheduling policy and parameters
@@ -123,24 +124,24 @@ void print_info(pid_t pid) {
 			counterE++;
 			printf("Error: sched_getscheduler for process with P_ID: %d\n", pidArray[j]);
 		}
-		printf("Process with P_ID: %d Policy: %d", pidArray[j], ret);
+		printf("Process with P_ID: %d Policy: %d\n", pidArray[j], ret);
 
 		switch (ret)
 		{
 		case SCHED_OTHER: // the default policy, use SCHED_NORMAL instead of SCHED_OTHER sometimes
 			pidArrayByPolicyOther[counterO] = pidArray[j];
 			counterO++;
-			printf("Process with P_ID: %d Policy SCHED_OTHER: %d", pidArray[j], ret);
+			printf("Process with P_ID: %d Policy SCHED_OTHER: %d\n", pidArray[j], ret);
 			break;
 		case SCHED_FIFO:
 			pidArrayByPolicyFifo[counterF] = pidArray[j];
 			counterF++;
-			printf("Process with P_ID: %d Policy SCHED_FIFO: %d", pidArray[j], ret);
+			printf("Process with P_ID: %d Policy SCHED_FIFO: %d\n", pidArray[j], ret);
 			break;
 		case SCHED_RR:
 			pidArrayByPolicyRr[counterR] = pidArray[j];
 			counterR++;
-			printf("Process with P_ID: %d Policy SCHED_RR: %d", pidArray[j], ret);
+			printf("Process with P_ID: %d Policy SCHED_RR: %d\n", pidArray[j], ret);
 			break;
 		// case SCHED_BATCH: this Linux does not supports it
 		// 	break;
@@ -157,7 +158,7 @@ void print_info(pid_t pid) {
 		if(ret != 0) {
 			printf("Error: sched_getparam\n");
 		}
-		// printf("Priority: %d\n", stSched.sched_priority);
+		printf("Priority: %d\n", stSched.sched_priority);
 		memset(&stSched, 0, sizeof(struct sched_param));
 		i++;
 	}
@@ -192,7 +193,9 @@ int main() {
 	sched_yield();
 	pid_t pid = THEPID;
 	alter_scheduling(pid);
-	change_nice_value(pid, -20);
+	print_info(pid);
+	change_nice_value(169, -20);
+	alter_scheduling(pid);
 	print_info(pid);
 
 	return 0;
